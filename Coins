@@ -1,0 +1,122 @@
+# SOLUTION 1  # prompt: change coins
+
+def change(amount, coins):
+  """
+  This function finds the minimum number of coins needed to make change for a given amount.
+
+  Args:
+      amount: The amount of change to make.
+      coins: A list of coin denominations.
+
+  Returns:
+      A list of coins that make up the minimum number of coins needed to make change.
+  """
+
+  # Initialize the result list.
+  result = []
+
+  # Sort the coins in descending order.
+  coins.sort(reverse=True)
+
+  # Iterate through the coins until the amount is zero.
+  while amount > 0:
+    # Find the largest coin that is less than or equal to the amount.
+    for coin in coins:
+      if coin <= amount:
+        # Add the coin to the result list.
+        result.append(coin)
+
+        # Subtract the coin from the amount.
+        amount -= coin
+
+        # Break out of the loop.
+        break
+
+  # Return the result list.
+  return result
+
+
+# Example usage.
+amount = 99
+coins = [25,10,5,1]
+
+change_list = change(amount, coins)
+
+print("Minimum number of coins needed:", len(change_list))
+print("Coins used:", change_list)
+
+# SOLUTION 2
+# prompt: change coins
+
+def change(amount, coins):
+  # Initialize the number of coins to 0
+  num_coins = 0
+
+  # Iterate through the coins in descending order
+  for i in range(len(coins) - 1, -1, -1):
+    # While the amount is greater than or equal to the current coin
+    while amount >= coins[i]:
+      # Subtract the current coin from the amount
+      amount -= coins[i]
+      # Increment the number of coins
+      num_coins += 1
+
+  # Return the number of coins
+  return num_coins
+
+# Get the amount of change from the user
+amount = int(input("Enter the amount of change (in cents): "))
+
+# Define the list of coins
+coins = [3, 5, 10, 25]
+
+# Calculate the minimum number of coins
+num_coins = change(amount, coins)
+
+# Print the results
+print("The minimum number of coins is:", num_coins)
+
+
+# SOLUTION 3 
+# prompt: change coins
+
+def change(cents):
+  # Create a list of coin denominations
+  denoms = [25, 10, 5, 3]
+
+  # Initialize the number of coins to 0
+  num_coins = 0
+
+  # Iterate through the denominations in descending order
+  for denom in denoms:
+    # While the cents remaining is greater than or equal to the current denomination
+    while cents >= denom:
+      # Increment the number of coins
+      num_coins += 1
+      # Subtract the current denomination from the cents remaining
+      cents -= denom
+
+  # Return the number of coins
+  return num_coins
+
+change(99)
+
+
+# SOLUTION 4 # prompt: change coins
+
+def change(cents):
+  num_quarters = cents // 25
+  remainder = cents % 25
+  num_dimes = remainder // 10
+  remainder = remainder % 10
+  num_nickels = remainder // 5
+  remainder = remainder % 5
+  num_pennies = remainder
+  return num_quarters, num_dimes, num_nickels, num_pennies
+
+cents = 99
+num_quarters, num_dimes, num_nickels, num_pennies = change(cents)
+print("Quarters:", num_quarters)
+print("Dimes:", num_dimes)
+print("Nickels:", num_nickels)
+print("Pennies:", num_pennies)
